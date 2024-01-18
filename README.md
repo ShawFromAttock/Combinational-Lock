@@ -20,34 +20,34 @@ Eight switches for Data Entry and Key Code.
 ##Working of Combinational Lock:
 Four switches act to hold the correct code for unlocking the lock, while the other switches serve as a data entry point for the person trying to open the lock.
 In real life, of course, the switch assembly with the “key” code set on it must be hidden from the sight of the person opening the lock, which means it must be physically located elsewhere from where the data entry switch assembly is. This requires two switch assemblies.
- 
+
 ##Proteus:
 1.	When the combination is correct: 
 2.	When the combination isn’t correct: 
 
-##Circuit Explanation:
+## Circuit Explanation:
 This circuit illustrates the use of XNOR (Exclusive-NOR) gates as bit comparators. Four of these XNOR gates compare the respective bits of two 4-bit binary numbers, each number “entered” into the circuit via a set of switches. If the two numbers match, the output of XNOR gates will be 1, otherwise 0. Now I have connected all XNOR gates output to one 4-input AND gate. If all XNOR gates give 1 output, AND gate will give 1 output. And even if one XNOR gate gives 0, output on AND gate will be zero. Now the output of AND gate is connected to two LEDs. One LED turns on when AND gate output is 1, which means that the key code and Data entry match. The lock is now unlocked. The other LED is connected to AND gate output via a NOT gate. So when the AND gate output is 0, the NOT gate converts it to 1, turning the 2nd LED on and indicating that the Key Code and Data Entry don’t match. For visual representation, I have connected the Data Entry inputs or switches to a 7 Segment BCD display, which will show what digit you’re giving as input. The other 7 Segment BCD display that I have used is to show if the Lock is OPEN or CLOSED. Three inputs of this 2nd display is connected to ground. This means that this display can only show 0 (when the codes don’t match and lock remains CLOSED) and 1 (when the codes match and lock is now OPEN).
 The “key” code that must be matched at the data entry switch array should be hidden from view, of course. If this were part of a real security system, the data entry switch assembly would be located outside the door and the key code switch assembly behind the door with the rest of the circuitry.
-##Advantages:
-###1) Don’t need any key
+## Advantages:
+### 1) Don’t need any key
 How’s you feel if you don’t need to pick a set of keys. It is a great feeling when you know that now you don’t need to carry your house key with you everywhere. Just dial a pin code and open your main entrance door. Having a digital lock means there are no chance of lost your keys.
-###2) Hard to break
+### 2) Hard to break
 Biometric or digital locks are very hard to break for intruders and burglars. If you install a biometric lock in your house, you are ensured that your personal belongings are safe and secure. The main benefits of having a digital lock that the doors are automatically locked when you closed it.
-###3) Maintenance Free
+### 3) Maintenance Free
 Most of the homeowners have a misconception that biometric locks need maintenance and repair service after some times. They also think that these locks require a huge amount of electricity for running. But the truth is something else.
 
 
-##Disadvantages:
+## Disadvantages:
 
-###1) Power Failure
+### 1) Power Failure
 There is no doubt that digital locks run with a single battery for several years. But some locks run with only electricity. If you have installed an electric lock on your house, you cannot operate it in the absence of electricity.
-###2) Forgetful
+### 2) Forgetful
 With a biometric lock, there is a possibility that you forget your pin that you set to unlock it. Once you forget the code, you are not able to access the door until to a professional not reach you.
 Having a keyless door lock system is a great idea, but you need to consider its disadvantages also. If you have lost your keys various times, then digital locks are good for you.
-###3) Don’t share the Pin
+### 3) Don’t share the Pin
 Sometimes, in an emergency situation, you need to share your pic code with your neighbors or friends. Before sharing your code with them, make sure you tell the code only that person who you trust. If by mistake, you share it with a wrong person, there are chances of burglary.
 
-##Xilinx Code:
+## Xilinx Code:
 1.	Main Module:
 module lock(i,j,y,a,bcd1,bcd2
     );
@@ -129,7 +129,7 @@ initial begin
 End
 Endmodule
 
-##Code Explanation:
+## Code Explanation:
 1.	In the main module, I’ve declared two 4-bit inputs i and j, which represent the key code and data entry respectively.
 2.	I have declared two outputs, y and a, which represent the UNLOCK and LOCK state of the combinational lock respectively.
 3.	I have declared two 8 bit outputs, bcd1 and bcd2 representing the BCD display outputs.
@@ -139,5 +139,5 @@ Endmodule
 7.	Then I called in the 7 segment module to two times, first to show the data entry and the second one to show if the output is 0 (closed) or 1 (open).
 8.	The 7 segment module consists of the output that it has to show from 0 to 15. The default case for it is 1111111 which means that all LEDs will be off.
 9.	In the test bench, first I have entered i=1010, which means that if j is the same, y will be 1, otherwise a will be 1. So I entered wrong data entry i.e j=0101. The output in the graph will show that the Lock remains in CLOSED state. Then I entered the correct value of j, so the lock goes to OPEN state. I further tried different data entry and key codes for better clarity.
-##Conclusion:
+## Conclusion:
 This project shows how we can use the working of XNOR gates to create a combinational lock and use 7 segment displays for the output of the code, I have used Proteus and Xilinx simulation to show the circuit and output the result with graphs respectively. This is a combinational lock with two input assemblies, one is KEY CODE and the other is DATE ENTRY. The behavior of XNOR gate is very helpful in making these small combinational locks and are very helpful on large scale and industrial/professional use.
