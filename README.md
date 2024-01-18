@@ -1,5 +1,5 @@
-#Combinational Lock
-#Project Report
+# Combinational Lock
+# Project Report
 
            Course:		Digital Logic Design
            Instructor:	        Asma Ramay
@@ -8,9 +8,9 @@
                                 Zain Ali Shah               
                                 FA19-BCE-092
  
-##Introduction:
+## Introduction:
 A combination lock is a type of locking device in which a sequence of symbols, usually numbers, is used to open the lock. The sequence may be entered using a single rotating dial which interacts with several discs or cams, by using a set of several rotating discs with inscribed symbols which directly interact with the locking mechanism, or through an electronic or mechanical keypad. Types range from inexpensive three-digit luggage locks to high-security safes. Unlike ordinary padlocks, combination locks do not use keys. In which a sequence of numbers is used to open the lock.
-##Components:
+## Components:
 Two 7 SEG BCD Display.
 Four 4077 XNOR Gates.
 One 4-input AND Gate.
