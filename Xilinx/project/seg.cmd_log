@@ -1,0 +1,1 @@
+xst -intstyle ise -ifn "E:/project/seg.xst" -ofn "E:/project/seg.syr" 
