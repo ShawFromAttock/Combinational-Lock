@@ -21,9 +21,6 @@ Eight switches for Data Entry and Key Code.
 Four switches act to hold the correct code for unlocking the lock, while the other switches serve as a data entry point for the person trying to open the lock.
 In real life, of course, the switch assembly with the “key” code set on it must be hidden from the sight of the person opening the lock, which means it must be physically located elsewhere from where the data entry switch assembly is. This requires two switch assemblies.
 
-##Proteus:
-1.	When the combination is correct: 
-2.	When the combination isn’t correct: 
 
 ## Circuit Explanation:
 This circuit illustrates the use of XNOR (Exclusive-NOR) gates as bit comparators. Four of these XNOR gates compare the respective bits of two 4-bit binary numbers, each number “entered” into the circuit via a set of switches. If the two numbers match, the output of XNOR gates will be 1, otherwise 0. Now I have connected all XNOR gates output to one 4-input AND gate. If all XNOR gates give 1 output, AND gate will give 1 output. And even if one XNOR gate gives 0, output on AND gate will be zero. Now the output of AND gate is connected to two LEDs. One LED turns on when AND gate output is 1, which means that the key code and Data entry match. The lock is now unlocked. The other LED is connected to AND gate output via a NOT gate. So when the AND gate output is 0, the NOT gate converts it to 1, turning the 2nd LED on and indicating that the Key Code and Data Entry don’t match. For visual representation, I have connected the Data Entry inputs or switches to a 7 Segment BCD display, which will show what digit you’re giving as input. The other 7 Segment BCD display that I have used is to show if the Lock is OPEN or CLOSED. Three inputs of this 2nd display is connected to ground. This means that this display can only show 0 (when the codes don’t match and lock remains CLOSED) and 1 (when the codes match and lock is now OPEN).
@@ -46,88 +43,6 @@ With a biometric lock, there is a possibility that you forget your pin that you 
 Having a keyless door lock system is a great idea, but you need to consider its disadvantages also. If you have lost your keys various times, then digital locks are good for you.
 ### 3) Don’t share the Pin
 Sometimes, in an emergency situation, you need to share your pic code with your neighbors or friends. Before sharing your code with them, make sure you tell the code only that person who you trust. If by mistake, you share it with a wrong person, there are chances of burglary.
-
-## Xilinx Code:
-1.	Main Module:
-module lock(i,j,y,a,bcd1,bcd2
-    );
-input [3:0]i,j;
-output y;
-output a;
-assign z=1'b0;
-output [7:0] bcd1,bcd2;
-wire x,g,p,q;
-xnor xnor1(x,i[0],j[0]);
-xnor xnor2(g,i[1],j[1]);
-xnor xnor3(p,i[2],j[2]);
-xnor xnor4(q,i[3],j[3]);
-
-and and1(y,g,p,q,x);
-not g1(a,y);
-seg g2(j,bcd1);
-seg g3({z,z,z,y},bcd2);
-endmodule
-2.	7 Segment Module:
-module seg(bcd, segments
-    );
-input [3:0] bcd;
-output reg [7:0]segments;
-always@(bcd)begin
-case(bcd)
-   0:   segments=8'b10000000;
-   1:   segments=8'b11111001;
-   2:   segments=8'b10100100; 
-   3:   segments=8'b10110000; 
-   4:   segments=8'b10011001; 
-   5:   segments=8'b10010010; 
-   6:   segments=8'b10000010; 
-   7:   segments=8'b11111000; 
-   8:   segments=8'b10000000;
-   9:   segments=8'b10010000;
-	10:  segments=8'b10001000;
-	11:  segments=8'b10000011;
-	12:  segments=8'b11000110;
-	13:  segments=8'b10100001;
-	14:  segments=8'b00001110;
-	15:  segments=8'b10001110;
-	default:  segments=8'b11111111;
-endcase
-end
-endmodule
-3.	Test Bench:
-module test;
-// Inputs
-	reg [3:0] i;
-	reg [3:0] j;
-// Outputs
-	wire y;
-	wire a;
-	wire [7:0] bcd1;
-	wire [7:0] bcd2;
-// Instantiate the Unit Under Test (UUT)
-	lock uut (
-		.i(i), 
-		.j(j), 
-		.y(y), 
-		.a(a), 
-		.bcd1(bcd1), 
-		.bcd2(bcd2)
-	);
-initial begin
-		// Initialize Inputs
-		i = 4'b1010;
-		j = 4'b0101;
-		#10;
-		j= 4'b1010;
-		#10;
-		i= 4'b1111;
-		j= 4'b1111;
-		#10;
-		i= 4'b0001;
-		j= 4'b0010;
-                   #10 $finish;
-End
-Endmodule
 
 ## Code Explanation:
 1.	In the main module, I’ve declared two 4-bit inputs i and j, which represent the key code and data entry respectively.
